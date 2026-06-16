@@ -1866,7 +1866,7 @@
       <div class="sw-grid rv" style="transition-delay:.15s">
 
         <button class="sw-tile" type="button" aria-label="Play Dreep — Startup Film" data-tile="dreep"
-          data-src="https://www.www.youtube-nocookie.com/embed/vaPfTVYhjNE?rel=0&controls=1">
+          data-src="https://youtu.be/vaPfTVYhjNE">
           <video class="sw-vid" muted loop playsinline preload="metadata"
             poster="https://img.youtube.com/vi/vaPfTVYhjNE/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/dreep_v6_1080_without_subtitles.mp4#t=0.5"
@@ -1881,7 +1881,7 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play Neo — Real Estate Film" data-tile="neo"
-          data-src="https://www.www.youtube-nocookie.com/embed/DAJgm2UiTes?rel=0&controls=1">
+          data-src="https://youtu.be/DAJgm2UiTes">
           <video class="sw-vid" muted loop playsinline preload="metadata"
             poster="https://img.youtube.com/vi/DAJgm2UiTes/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/neo_v5_web.mp4#t=0.5"
@@ -1896,7 +1896,7 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play NVIDIA — Tech Brand Film" data-tile="nvidia"
-          data-src="https://www.www.youtube-nocookie.com/embed/vtHQWwVaF20?rel=0&controls=1">
+          data-src="https://youtu.be/vtHQWwVaF20">
           <video class="sw-vid" muted loop playsinline preload="metadata"
             poster="https://img.youtube.com/vi/vtHQWwVaF20/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/NVIDIA_v12_web.mp4#t=0.5"
@@ -1911,7 +1911,7 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play AutoTel — Mobility Reel" data-tile="autotel"
-          data-src="https://www.www.youtube-nocookie.com/embed/Bj7ppSGHFNA?rel=0&controls=1">
+          data-src="https://youtu.be/Bj7ppSGHFNA">
           <video class="sw-vid" muted loop playsinline preload="metadata"
             poster="https://img.youtube.com/vi/Bj7ppSGHFNA/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/AutoTel_v1.mp4#t=0.5"
@@ -1926,7 +1926,7 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play Bronco — Behind The Scene" data-tile="bronco"
-          data-src="https://www.www.youtube-nocookie.com/embed/6lvwx0V7BYg?rel=0&controls=1">
+          data-src="https://youtu.be/6lvwx0V7BYg">
           <video class="sw-vid" muted loop playsinline preload="metadata"
             poster="https://img.youtube.com/vi/6lvwx0V7BYg/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/bronco_web.mp4#t=0.5"
@@ -1941,7 +1941,7 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play Premium Consumer Brand Film" data-tile="skechers"
-          data-src="https://www.www.youtube-nocookie.com/embed/jzYLUQUHDsY?rel=0&controls=1">
+          data-src="https://youtu.be/jzYLUQUHDsY">
           <video class="sw-vid" muted loop playsinline preload="metadata"
             poster="https://img.youtube.com/vi/jzYLUQUHDsY/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/skechers.mp4#t=0.5"
@@ -2914,10 +2914,7 @@
         lbStage.classList.add('is-loading');
         lb.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-        if (src.includes('youtube')) {
-          lb.classList.remove('is-open');
-          lbStage.classList.remove('is-loading');
-          document.body.style.overflow = '';
+        if (src.startsWith('https://youtu.be/')) {
           window.open(src, '_blank');
           return;
         } else {
