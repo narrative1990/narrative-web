@@ -1866,9 +1866,9 @@
       <div class="sw-grid rv" style="transition-delay:.15s">
 
         <button class="sw-tile" type="button" aria-label="Play Dreep — Startup Film" data-tile="dreep"
-          data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/dreep_v6_1080_without_subtitles.mp4">
+          data-src="https://www.youtube.com/embed/vaPfTVYhjNE?autoplay=1&rel=0">
           <video class="sw-vid" muted loop playsinline preload="metadata"
-            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
+            poster="https://img.youtube.com/vi/vaPfTVYhjNE/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/dreep_v6_1080_without_subtitles.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1881,9 +1881,9 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play Neo — Real Estate Film" data-tile="neo"
-          data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/neo_v5_web.mp4">
+          data-src="https://www.youtube.com/embed/DAJgm2UiTes?autoplay=1&rel=0">
           <video class="sw-vid" muted loop playsinline preload="metadata"
-            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/man-racing-dirt-bike-fantasy-environment.jpg"
+            poster="https://img.youtube.com/vi/DAJgm2UiTes/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/neo_v5_web.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1896,9 +1896,9 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play NVIDIA — Tech Brand Film" data-tile="nvidia"
-          data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/NVIDIA_v12_web.mp4">
+          data-src="https://www.youtube.com/embed/vtHQWwVaF20?autoplay=1&rel=0">
           <video class="sw-vid" muted loop playsinline preload="metadata"
-            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
+            poster="https://img.youtube.com/vi/vtHQWwVaF20/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/NVIDIA_v12_web.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1911,9 +1911,9 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play AutoTel — Mobility Reel" data-tile="autotel"
-          data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/AutoTel_v1.mp4">
+          data-src="https://www.youtube.com/embed/Bj7ppSGHFNA?autoplay=1&rel=0">
           <video class="sw-vid" muted loop playsinline preload="metadata"
-            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
+            poster="https://img.youtube.com/vi/Bj7ppSGHFNA/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/AutoTel_v1.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1941,9 +1941,9 @@
         </button>
 
         <button class="sw-tile" type="button" aria-label="Play Premium Consumer Brand Film" data-tile="skechers"
-          data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/skechers.mp4">
+          data-src="https://www.youtube.com/embed/jzYLUQUHDsY?autoplay=1&rel=0">
           <video class="sw-vid" muted loop playsinline preload="metadata"
-            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/man-racing-dirt-bike-fantasy-environment.jpg"
+            poster="https://img.youtube.com/vi/jzYLUQUHDsY/hqdefault.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/skechers.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -2912,18 +2912,41 @@
       function openLightbox(src) {
         if (!src) return;
         lbStage.classList.add('is-loading');
-        lbVid.src = src;
-        lbVid.load();
         lb.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-        lbVid.addEventListener('canplay', () => lbVid.play().catch(() => {}), { once: true });
+        if (src.includes('youtube.com/embed')) {
+          lbVid.style.display = 'none';
+          let iframe = document.getElementById('sw-lb-iframe');
+          if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.id = 'sw-lb-iframe';
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;background:#000;';
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            lbStage.appendChild(iframe);
+          }
+          iframe.style.display = 'block';
+          iframe.src = src;
+          iframe.onload = () => lbStage.classList.remove('is-loading');
+        } else {
+          let iframe = document.getElementById('sw-lb-iframe');
+          if (iframe) iframe.style.display = 'none';
+          lbVid.style.display = 'block';
+          lbVid.src = src;
+          lbVid.load();
+          lbVid.addEventListener('canplay', () => lbVid.play().catch(() => {}), { once: true });
+        }
       }
       function closeLightbox() {
         lb.classList.remove('is-open');
         lbStage.classList.remove('is-loading');
         lbVid.pause();
         document.body.style.overflow = '';
-        setTimeout(() => { lbVid.removeAttribute('src'); lbVid.load(); }, 450);
+        setTimeout(() => {
+          lbVid.removeAttribute('src'); lbVid.load();
+          const iframe = document.getElementById('sw-lb-iframe');
+          if (iframe) { iframe.src = ''; iframe.style.display = 'none'; }
+        }, 450);
       }
 
       tiles.forEach(tile => {
