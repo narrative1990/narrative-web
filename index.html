@@ -1797,6 +1797,7 @@
     <div class="hero-video-wrap">
       <video id="hero-vid"
         autoplay muted loop playsinline preload="auto"
+        poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
         style="opacity:.55;"
         src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/REEL_hero_web.mp4">
       </video>
@@ -1867,6 +1868,7 @@
         <button class="sw-tile" type="button" aria-label="Play Dreep — Startup Film" data-tile="dreep"
           data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/dreep_v6_1080_without_subtitles.mp4">
           <video class="sw-vid" muted loop playsinline preload="metadata"
+            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/dreep_v6_1080_without_subtitles.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1881,6 +1883,7 @@
         <button class="sw-tile" type="button" aria-label="Play Neo — Real Estate Film" data-tile="neo"
           data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/neo_v5_web.mp4">
           <video class="sw-vid" muted loop playsinline preload="metadata"
+            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/man-racing-dirt-bike-fantasy-environment.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/neo_v5_web.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1895,6 +1898,7 @@
         <button class="sw-tile" type="button" aria-label="Play NVIDIA — Tech Brand Film" data-tile="nvidia"
           data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/NVIDIA_v12_web.mp4">
           <video class="sw-vid" muted loop playsinline preload="metadata"
+            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/NVIDIA_v12_web.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1909,6 +1913,7 @@
         <button class="sw-tile" type="button" aria-label="Play AutoTel — Mobility Reel" data-tile="autotel"
           data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/AutoTel_v1.mp4">
           <video class="sw-vid" muted loop playsinline preload="metadata"
+            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/AutoTel_v1.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1923,6 +1928,7 @@
         <button class="sw-tile" type="button" aria-label="Play Bronco — Behind The Scene" data-tile="bronco"
           data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/bronco_web.mp4">
           <video class="sw-vid" muted loop playsinline preload="metadata"
+            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/behindthescenes_web.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/bronco_web.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -1937,6 +1943,7 @@
         <button class="sw-tile" type="button" aria-label="Play Premium Consumer Brand Film" data-tile="skechers"
           data-src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/skechers.mp4">
           <video class="sw-vid" muted loop playsinline preload="metadata"
+            poster="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/man-racing-dirt-bike-fantasy-environment.jpg"
             src="https://github.com/narrative1990/narrative-media-assets/releases/download/v1/skechers.mp4#t=0.5"
             aria-hidden="true"></video>
           <div class="sw-overlay">
@@ -2906,9 +2913,10 @@
         if (!src) return;
         lbStage.classList.add('is-loading');
         lbVid.src = src;
+        lbVid.load();
         lb.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-        lbVid.play().catch(() => {});
+        lbVid.addEventListener('canplay', () => lbVid.play().catch(() => {}), { once: true });
       }
       function closeLightbox() {
         lb.classList.remove('is-open');
