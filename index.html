@@ -1865,7 +1865,7 @@
 
       <div class="sw-grid rv" style="transition-delay:.15s">
 
-        <a class="sw-tile" href="https://youtu.be/vaPfTVYhjNE" target="_blank" rel="noopener" aria-label="Play Dreep — Startup Film" data-tile="dreep">
+        <button type="button" class="sw-tile" data-src="https://player.vimeo.com/video/1201919984?autoplay=1&title=0&byline=0&portrait=0" aria-label="Play Dreep — Startup Film" data-tile="dreep">
           <img class="sw-vid" src="https://img.youtube.com/vi/vaPfTVYhjNE/maxresdefault.jpg" aria-hidden="true" loading="lazy">
           <div class="sw-overlay">
             <div class="sw-meta">
@@ -1874,9 +1874,9 @@
             </div>
             <div class="sw-play" aria-hidden="true"><span class="sw-play-tri"></span></div>
           </div>
-        </a>
+        </button>
 
-        <a class="sw-tile" href="https://youtu.be/DAJgm2UiTes" target="_blank" rel="noopener" aria-label="Play Neo — Real Estate Film" data-tile="neo">
+        <button type="button" class="sw-tile" data-src="https://player.vimeo.com/video/1201919716?autoplay=1&title=0&byline=0&portrait=0" aria-label="Play Neo — Real Estate Film" data-tile="neo">
           <img class="sw-vid" src="https://img.youtube.com/vi/DAJgm2UiTes/maxresdefault.jpg" aria-hidden="true" loading="lazy">
           <div class="sw-overlay">
             <div class="sw-meta">
@@ -1885,9 +1885,9 @@
             </div>
             <div class="sw-play" aria-hidden="true"><span class="sw-play-tri"></span></div>
           </div>
-        </a>
+        </button>
 
-        <a class="sw-tile" href="https://youtu.be/vtHQWwVaF20" target="_blank" rel="noopener" aria-label="Play NVIDIA — Tech Brand Film" data-tile="nvidia">
+        <button type="button" class="sw-tile" data-src="https://player.vimeo.com/video/1201919605?autoplay=1&title=0&byline=0&portrait=0" aria-label="Play NVIDIA — Tech Brand Film" data-tile="nvidia">
           <img class="sw-vid" src="https://img.youtube.com/vi/vtHQWwVaF20/maxresdefault.jpg" aria-hidden="true" loading="lazy">
           <div class="sw-overlay">
             <div class="sw-meta">
@@ -1896,9 +1896,9 @@
             </div>
             <div class="sw-play" aria-hidden="true"><span class="sw-play-tri"></span></div>
           </div>
-        </a>
+        </button>
 
-        <a class="sw-tile" href="https://youtu.be/Bj7ppSGHFNA" target="_blank" rel="noopener" aria-label="Play AutoTel — Mobility Reel" data-tile="autotel">
+        <button type="button" class="sw-tile" data-src="https://player.vimeo.com/video/1201920099?autoplay=1&title=0&byline=0&portrait=0" aria-label="Play AutoTel — Mobility Reel" data-tile="autotel">
           <img class="sw-vid" src="https://img.youtube.com/vi/Bj7ppSGHFNA/maxresdefault.jpg" aria-hidden="true" loading="lazy">
           <div class="sw-overlay">
             <div class="sw-meta">
@@ -1907,9 +1907,9 @@
             </div>
             <div class="sw-play" aria-hidden="true"><span class="sw-play-tri"></span></div>
           </div>
-        </a>
+        </button>
 
-        <a class="sw-tile" href="https://youtu.be/6lvwx0V7BYg" target="_blank" rel="noopener" aria-label="Play Bronco — Behind The Scene" data-tile="bronco">
+        <button type="button" class="sw-tile" data-src="https://player.vimeo.com/video/1201919710?autoplay=1&title=0&byline=0&portrait=0" aria-label="Play Bronco — Behind The Scene" data-tile="bronco">
           <img class="sw-vid" src="https://img.youtube.com/vi/6lvwx0V7BYg/maxresdefault.jpg" aria-hidden="true" loading="lazy">
           <div class="sw-overlay">
             <div class="sw-meta">
@@ -1918,7 +1918,7 @@
             </div>
             <div class="sw-play" aria-hidden="true"><span class="sw-play-tri"></span></div>
           </div>
-        </a>
+        </button>
 
         <a class="sw-tile" href="https://youtu.be/jzYLUQUHDsY" target="_blank" rel="noopener" aria-label="Play Premium Consumer Brand Film" data-tile="skechers">
           <img class="sw-vid" src="https://img.youtube.com/vi/jzYLUQUHDsY/maxresdefault.jpg" aria-hidden="true" loading="lazy">
@@ -2541,6 +2541,7 @@
     <div class="sw-lb-stage" id="sw-lb-stage">
       <div class="sw-lb-spinner" aria-hidden="true"></div>
       <video class="sw-lb-vid" id="sw-lb-vid" controls playsinline preload="none"></video>
+      <iframe id="sw-lb-iframe" style="display:none;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -2887,14 +2888,16 @@
 
       function openLightbox(src) {
         if (!src) return;
+        const iframe = document.getElementById('sw-lb-iframe');
         lbStage.classList.add('is-loading');
         lb.classList.add('is-open');
         document.body.style.overflow = 'hidden';
-        if (src.startsWith('https://youtu.be/')) {
-          window.open(src, '_blank');
-          return;
+        if (src.includes('vimeo.com')) {
+          lbVid.style.display = 'none';
+          iframe.style.display = 'block';
+          iframe.src = src;
+          iframe.onload = () => lbStage.classList.remove('is-loading');
         } else {
-          let iframe = document.getElementById('sw-lb-iframe');
           if (iframe) iframe.style.display = 'none';
           lbVid.style.display = 'block';
           lbVid.src = src;
